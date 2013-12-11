@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  div(id='map-canvas')
+  div(ng-controller='Slidey')
+    div.questions(ng-if="!needsaddr")
+      a(href, ng-click="askQuestions()") <i>Is this creepy?</i>
+    div.scroller
+      slider(floor="0" ceiling="{{locs ? locs.length - 1 : 20}}", ng-model="timeidx");
+      | {{ updateMarkers() }}
+    div.date <b> {{locs[timeidx].time}}</b>
+
+    div(modal="needsaddr")
+      div.modal-header
+          h3 What's your MAC address?
+      div.modal-body 
+        form.form-inline(ng-submit="getMac()")
+          input.input-block-level(type="text", ng-model="mac", placeholder="MAC address")
+        p We've been gathering your device's MAC address whenever it scans for wifi networks.
+          | Enter your address to see where on campus it's been broadcasting its location.
+          | Ask one of your geeky friends if you don't know how.
+      div.modal-footer
+
+    div(modal="showabout")
+      div.modal-header
+          h3 What is this site?
+      div.modal-body 
+        p This site is a class project for Yale's CPSC 183, <i>Law, Technology and Culture</i>.
+          | We're looking at people's expectations of privacy with respect to their MAC addresses,
+          | a standard that defines when the government needs a warrant to creep on you.
+          | If you want to help us out, please fill out <a ng-click="askQuestions()">this form</a>.
+          | We'd love to get your feedback.
+      div.modal-footer
+        p.small <i>This site and all associated code is licenced under BSD-3.</i>
+
+    div(modal="questions", ng-submit="replyQuestions()")
+      div.modal-header
+          h3 Does this site invade your privacy?
+      div.modal-body 
+        p Please evaluate the following questions on a scale from 1 to 10.
+        form
+          label How creepy is this?
+          input(type="text", ng-model="creepy")
+          label How much would you be comfortable with the government tracking your MAC address information?
+          input(type="text", ng-model="gov")
+          label How much would you be comfortable with other people tracking your MAC address information?
+          input(type="text", ng-model="others")
+          label How much do you agree with the following statement: 'MAC address sniffing should require a warrant'?
+          input(type="text", ng-model="warrant")
+          div
+            button.btn(type="submit") Submit
+      div.modal-footer <i><a ng-click="questions = false; showabout = true;">About this project</a></i>
