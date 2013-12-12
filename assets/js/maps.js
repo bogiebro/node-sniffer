@@ -1,6 +1,7 @@
 var app = angular.module('app', ['uiSlider', 'ui.bootstrap']);
 
 var Slidey = function($scope, $http){
+
   $scope.getMac = function() {
     $scope.needsaddr = false;
     $http.get('/mac/' + $scope.mac).then(function(result) {
@@ -21,11 +22,15 @@ var Slidey = function($scope, $http){
   }
 
   $scope.replyQuestions = function() {
-    // store the stuff on the server
-  }
-
-  $scope.replyQuestions = function() {
     $scope.questions = false;
+    $http.post('/questions/' + $scope.mac, {
+      creepy: $scope.creepy,
+      gov: $scope.gov,
+      others: $scope.others,
+      warrant: $scope.warrant
+    }).then(function(result) {
+      console.log(result.data);
+    });
   }
   
   function initialize() {
