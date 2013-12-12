@@ -6,6 +6,7 @@ var Slidey = function($scope, $http){
     $scope.needsaddr = false;
     $http.get('/mac/' + $scope.mac).then(function(result) {
       if (result.data.length == 0) {
+        $scope.mac = null;
         $scope.problem = true;
       } else {
         $scope.locs = result.data;
@@ -28,8 +29,6 @@ var Slidey = function($scope, $http){
       gov: $scope.gov,
       others: $scope.others,
       warrant: $scope.warrant
-    }).then(function(result) {
-      console.log(result.data);
     });
   }
   

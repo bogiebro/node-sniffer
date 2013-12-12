@@ -3,7 +3,7 @@ extends layout
 block content
   div(id='map-canvas')
   div(ng-controller='Slidey')
-    div.questions(ng-if="!needsaddr")
+    div.questions(ng-if="!needsaddr && mac")
       a(href, ng-click="askQuestions()") <i>Is this creepy?</i>
     div.scroller
       slider(floor="0" ceiling="{{locs ? locs.length - 1 : 20}}", ng-model="timeidx");
