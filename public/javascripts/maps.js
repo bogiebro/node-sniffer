@@ -1,10 +1,4 @@
 var app = angular.module('app', ['uiSlider', 'ui.bootstrap']);
- 
-/*
-- need to know range of dates for the scroller
-- this could mean we get the full list of timestamps
-- all we do on user updates is hide the old marker, show the new one, set the content to the time
-*/
 
 function Slidey($scope, $http){
   $scope.getMac = function() {
