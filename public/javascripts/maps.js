@@ -10,9 +10,14 @@ function Slidey($scope, $http){
   $scope.getMac = function() {
     $scope.needsaddr = false;
     $http.get('/mac/' + $scope.mac).then(function(result) {
-      $scope.locs = result.data;
-      $scope.timeidx = $scope.locs.length - 1;
-      $scope.updateMarkers();
+      console.log(result.data);
+      if (result.data.length == 0) {
+        $scope.problem = true;
+      } else {
+        $scope.locs = result.data;
+        $scope.timeidx = $scope.locs.length - 1;
+        $scope.updateMarkers();
+      }
     });
   }
 
@@ -38,34 +43,34 @@ function Slidey($scope, $http){
     $scope.map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     var infowindow = new google.maps.InfoWindow({});
     
-    $scope.ceid = new google.maps.Marker({
+    $scope.CEID = new google.maps.Marker({
         position: new google.maps.LatLng(41.312508, -72.925242),
         title:"CEID"
     }); 
 
-    $scope.woolsey = new google.maps.Marker({
+    $scope.WOOLSEY = new google.maps.Marker({
         position: new google.maps.LatLng(41.311823, -72.926014),
         title:"Woolsey Hall"
     });
 
-    $scope.oc = new google.maps.Marker({
+    $scope.OC = new google.maps.Marker({
         position: new google.maps.LatLng(41.308894, -72.928706),
         title:"Old Campus"
     });
 
-    google.maps.event.addListener($scope.woolsey, 'click', function() {
+    google.maps.event.addListener($scope.WOOLSEY, 'click', function() {
       infowindow.setContent('<div id="content">You were in Woolsey Hall at ' + $scope.locs[$scope.timeidx].time + '</div>');
-      infowindow.open($scope.map, $scope.woolsey);
+      infowindow.open($scope.map, $scope.WOOLSEY);
     });
 
-    google.maps.event.addListener($scope.ceid, 'click', function() {
+    google.maps.event.addListener($scope.CEID, 'click', function() {
       infowindow.setContent('<div id-"content"> You were in the CEID at ' + $scope.locs[$scope.timeidx].time + '</div>');
-      infowindow.open($scope.map, $scope.ceid);
+      infowindow.open($scope.map, $scope.CEID);
     });
 
-    google.maps.event.addListener($scope.oc, 'click', function() {
+    google.maps.event.addListener($scope.OC, 'click', function() {
       infowindow.setContent('<div id="content"> You were on Old Campus at ' + $scope.locs[$scope.timeidx].time + '</div>');
-      infowindow.open($scope.map, $scope.oc);
+      infowindow.open($scope.map, $scope.OC);
     });
 
   }
