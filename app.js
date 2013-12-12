@@ -33,7 +33,7 @@ app.get('/', function(req, res){
   res.render('index', { title: 'Yalie Tracker' });
 });
 
-AWS.config.loadFromPath('./config.json');
+AWS.config.update({region: 'us-east-1'});
 var db = new AWS.DynamoDB();
 app.get('/mac/:macid', function(req, res) {
     db.getItem({
