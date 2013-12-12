@@ -41,6 +41,7 @@ app.get('/mac/:macid', function(req, res) {
         Key: {"MAC": {S: req.params.macid}}
     }, function(err, data) {
         if (err || !data.Item) {
+            if (err) console.log(err);
             res.json([]);
         } else {
             var item = data.Item;
