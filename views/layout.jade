@@ -2,8 +2,8 @@ doctype 5
 html(ng-app='app')
   head
     title= title
-    != css('style')
   body
     block content
-    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA-sIjFbtm0d9iao79i8fN7ibfRLqUUBlw&sensor=false')
+    != css('style')
     != js('maps')
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA-sIjFbtm0d9iao79i8fN7ibfRLqUUBlw&sensor=false')
