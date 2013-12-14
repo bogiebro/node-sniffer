@@ -4,7 +4,6 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var AWS = require('aws-sdk');
-var moment = require('moment');
 var app = express();
 
 // AWS config
@@ -76,19 +75,14 @@ app.get('/mac/:macid', function(req, res) {
             res.json([]);
         } else {
             var item = data.Item;
-            var keys = Object.keys(item);
+            var keys = Object.keys(item).sort();
             var len = keys.length;
             var result = new Array(Math.max(0,len - fields.length));
             var j=0;
             for (var i = 0; i < len; i++) {
                 if (fields.indexOf(keys[i]) == -1) {
-                    var t = moment.unix(parseInt(keys[i]));
-                    if (!t) {
-                        res.json([]);
-                        return;
-                    }
                     var d = new Date(keys[i]);
-                    result[j] = {loc: item[keys[i]].S, time: t.format("MMM D, h:mm A")}
+                    result[j] = {loc: item[keys[i]].S, time: keys[i]}
                     j++;
                 }
             }
