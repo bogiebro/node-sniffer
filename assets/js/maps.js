@@ -1,4 +1,5 @@
-var app = angular.module('app', ['uiSlider', 'ui.bootstrap']);
+//= require angular.min moment.min ui-bootstrap.min angular-slider.min
+var app = angular.module('app', ['uiSlider', 'ui.bootstrap.modal']);
 
 var Slidey = function($scope, $http){
 

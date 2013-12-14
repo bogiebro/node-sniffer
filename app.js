@@ -23,7 +23,6 @@ app.use(express.bodyParser());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
 
 // middleware for development
 if ('development' == app.get('env')) {
