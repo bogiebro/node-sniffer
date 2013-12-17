@@ -15,7 +15,10 @@ block content
           h3 What's your MAC address?
       div.modal-body 
         form.form-inline(ng-submit="getMac()")
-          input.input-block-level(type="text", ng-model="mac", placeholder="MAC address")
+          if reqmac
+            input.input-block-level(type="text", ng-model="mac",  ng-init="mac = '#{reqmac}'; getMac()")
+          else
+            input.input-block-level(type="text", ng-model="mac",  placeholder="MAC address")
         p We've been gathering your device's MAC address whenever it scans for wifi networks.
           | Enter your address to see where on campus it's been broadcasting its location.
           | Ask one of your geeky friends if you don't know how.
@@ -58,3 +61,6 @@ block content
       div.modal-body 
         p Looks like you've been able to evade our trackers. We can't show you anything creepy today. Try again some other time.
       div.modal-footer
+    if reqmac
+      script.
+        setMac("#{reqmac}"

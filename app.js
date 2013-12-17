@@ -33,6 +33,10 @@ app.get('/', function(req, res){
   res.render('index', { title: 'Yalie Tracker' });
 });
 
+app.get('/shortmac/:macid',function(req, res) {
+     res.render('index', { title: 'Yalie Tracker', reqmac: req.params.macid});
+})
+
 app.post('/questions/:macid', function(req, res) {
     db.updateItem({
         TableName: 'prod-ysniff',

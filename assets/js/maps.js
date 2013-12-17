@@ -75,7 +75,6 @@ var Slidey = function($scope, $http){
       infowindow.setContent('<div id="content"> You were on Old Campus at ' + $scope.locs[$scope.timeidx].time + '</div>');
       infowindow.open($scope.map, $scope.OC);
     });
-
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
