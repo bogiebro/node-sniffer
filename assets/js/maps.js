@@ -13,7 +13,6 @@ var Slidey = function($scope, $http){
         $scope.locs = result.data;
         for (var i = 0; i < $scope.locs.length; i++) {
           var item = $scope.locs[i];
-          console.log(item.time);
           item.time = moment.unix(parseInt(item.time)).format("MMM D, h:mm A");
         }
         $scope.timeidx = $scope.locs.length - 1;
